@@ -1,0 +1,8 @@
+/* slider-thumb.module.css */
+.customDots li {
+  width: 4rem !important;
+}
+
+.customDots li img {
+  width: 100% !important;
+}

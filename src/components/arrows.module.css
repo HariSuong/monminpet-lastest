@@ -1,0 +1,54 @@
+.arrow {
+  width: 40px !important;
+  height: 40px !important;
+  transition: all 0.3s ease;
+}
+
+/* Điều chỉnh vị trí cho mobile */
+.next-arrow {
+  /* Thay bằng class thực tế của bạn */
+  right: -50px !important;
+}
+
+.prev-arrow {
+  /* Thay bằng class thực tế của bạn */
+  left: -50px !important;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .arrow {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  /* Điều chỉnh vị trí cho mobile */
+  .next-arrow {
+    /* Thay bằng class thực tế của bạn */
+    right: -10px !important;
+  }
+
+  .prev-arrow {
+    /* Thay bằng class thực tế của bạn */
+    left: -10px !important;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .arrow {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* Điều chỉnh vị trí cho mobile */
+  .sample-next-arrow-class {
+    /* Thay bằng class thực tế của bạn */
+    right: -10px !important;
+  }
+
+  .sample-prev-arrow-class {
+    /* Thay bằng class thực tế của bạn */
+    left: -10px !important;
+  }
+}

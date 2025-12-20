@@ -1,0 +1,18 @@
+User-agent: *
+
+# Chan thu muc test
+Disallow: /products/*test*
+Disallow: /posts/*test*
+
+# Chan tat ca cac URL tim kiem (co chua tham so q=)
+Disallow: /*?q=*
+
+# Chan cac trang khong can thiet cho SEO
+Disallow: /cart
+Disallow: /login
+Disallow: /checkout
+
+Allow: /
+
+# Thêm sitemap để các bot dễ tìm thấy tất cả các trang
+Sitemap: https://monminpet.com/sitemap.xml

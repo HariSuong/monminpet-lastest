@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+
+    --chart-1: 12 76% 61%;
+
+    --chart-2: 173 58% 39%;
+
+    --chart-3: 197 37% 24%;
+
+    --chart-4: 43 74% 66%;
+
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  /* Sử dụng Tailwind với @apply để định kiểu cho các thành phần */
+  .content-container h1,
+  .content-container h2 {
+    @apply text-4xl font-bold mb-7  mt-5;
+  }
+
+  .content-container h3 {
+    @apply text-2xl font-bold mb-6 mt-5;
+  }
+
+  .content-container p {
+    @apply text-base mb-5 leading-relaxed;
+  }
+
+  .content-container p em {
+    @apply italic text-center block mt-2 mb-6;
+  }
+
+  .content-container p:has(> em:only-child) {
+    margin-bottom: 2.5rem; /* mb-10 */
+  }
+
+  .content-container p:has(> em:only-child) em {
+    @apply block mb-0; /* Reset margin-bottom của em */
+  }
+
+  .content-container span {
+    @apply block;
+  }
+
+  .content-container a {
+    @apply underline italic text-[#ffc13c];
+  }
+
+  .content-container ul,
+  .content-container ol {
+    /* @apply block list-disc ; */
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 40px;
+  }
+
+  .content-container ul li,
+  .content-container ol li {
+    @apply mb-2;
+  }
+
+  .content-container table {
+    @apply w-full border-collapse mb-8;
+  }
+
+  .content-container table td,
+  .content-container table th {
+    @apply border border-gray-300 p-2;
+  }
+
+  .content-container img {
+    @apply !w-full h-auto;
+  }
+
+  .content-container .ratio-16x9 {
+    /* --bs-aspect-ratio: calc(9 / 16 * 100%); */
+    @apply aspect-[16/9];
+  }
+
+  .content-container .ratio {
+    /* position: relative;
+	width: 100%; */
+    @apply relative w-full;
+  }
+  .content-container .ratio::before {
+    /* display: block;
+	padding-top: calc(9 / 16 * 100%);
+	content: ""; */
+    @apply block pt-[calc(9/16*100%)] content-[''];
+  }
+  .content-container .ratio > * {
+    /* position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%; */
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+  .content-container .ratio iframe {
+    /* border: 0; */
+    @apply border-none;
+  }
+
+  @media (max-width: 640px) {
+    .content-container h1,
+    .content-container h2 {
+      @apply text-lg font-medium mt-5;
+    }
+    .content-container h3 {
+      @apply text-base font-medium mb-6 mt-5;
+    }
+    .content-container p,
+    .content-container ul,
+    .content-container ol {
+      @apply text-sm mb-5 leading-relaxed;
+    }
+  }
+
+  /* Cho mobile */
+  @media (max-width: 480px) {
+    .post-slider .slick-slide > div {
+      height: 21rem !important; /* Chiều cao bạn đã test thành công */
+    }
+
+    .post-slider .slick-track {
+      display: flex !important;
+      align-items: stretch; /* Các item bằng nhau */
+    }
+
+    .post-slider .slick-slide {
+      height: auto !important; /* Cho slide tự động điều chỉnh */
+    }
+  }
+
+  /* Ẩn controls video trên iOS */
+  .video-element::-webkit-media-controls {
+    display: none !important;
+  }
+
+  .video-element::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
+
+  .video-element::-webkit-media-controls-panel {
+    display: none !important;
+  }
+
+  .video-element::-webkit-media-controls-play-button {
+    display: none !important;
+  }
+
+  .video-element::-webkit-media-controls-start-playback-button {
+    display: none !important;
+  }
+}
