@@ -45,8 +45,8 @@ const CartAttributeSelect: React.FC<CartAttributeSelectProps> = ({
   )
 
   // console.log('attribute', attribute)
-  console.log('attributeId', attributeId)
-  console.log('availableAttributes', item.availableAttributes)
+  // console.log('attributeId', attributeId)
+  // console.log('availableAttributes', item.availableAttributes)
 
   return (
     <>

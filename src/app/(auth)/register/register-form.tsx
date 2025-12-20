@@ -50,7 +50,7 @@ const RegisterForm = () => {
 
       // router.push('/login')
     } catch (error: any) {
-      console.log(error)
+      // console.log(error)
       const errors = error.payload.errors as { email: string }
 
       const status = error.status as number

@@ -14,7 +14,7 @@ const Benefit = async () => {
   const result = await accountApiRequest.gift(sessionToken.value)
   // console.log('result', result)
   if (!result) return
-  console.log('result', result)
+  // console.log('result', result)
   return (
     <div>
       <Point

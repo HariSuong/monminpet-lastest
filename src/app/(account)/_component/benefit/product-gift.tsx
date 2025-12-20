@@ -23,7 +23,7 @@ const ProductGift: React.FC<{ products: AccountGiftResType }> = ({
   const { addToCart } = useCart()
   const router = useRouter()
 
-  console.log('gift', products.data.products)
+  // console.log('gift', products.data.products)
 
   const handleAddToCart = (product: ProductPoint) => {
     let attributesToAdd = []

@@ -9,9 +9,9 @@ export const generateCartItemId = (
   productId?: string
 ): string => {
   let id = `${productId}` // Bắt đầu với productId
-  console.log('Type of attributes:', typeof attributes)
-  console.log('Is attributes an array?', Array.isArray(attributes))
-  console.log('Attributes:', attributes)
+  // console.log('Type of attributes:', typeof attributes)
+  // console.log('Is attributes an array?', Array.isArray(attributes))
+  // console.log('Attributes:', attributes)
 
   if (attributes.length === 0) {
     // Nếu không có thuộc tính, chỉ sử dụng productId làm ID
@@ -28,7 +28,7 @@ export const generateCartItemId = (
     .map(attr => `${attr.attribute_id}-${attr.name.replace(/\s+/g, '-')}`) // Gộp thuộc tính
     .join('_')
 
-  console.log('attributesPart', attributesPart)
+  // console.log('attributesPart', attributesPart)
 
   id += `_${attributesPart}` // Thêm phần thuộc tính vào ID
 

@@ -85,8 +85,8 @@ export const OrderSumary = () => {
   const { discount, reachedPrice, clearCoupon } = useCoupon()
 
   const totalPrice = cart.reduce((acc, item) => acc + item.total, 0)
-  console.log('totalPrice', totalPrice)
-  console.log('reachedPrice', reachedPrice)
+  // console.log('totalPrice', totalPrice)
+  // console.log('reachedPrice', reachedPrice)
   const shippingFee = totalPrice <= 1000000 ? 30000 : 0
 
   const discountedPrice =

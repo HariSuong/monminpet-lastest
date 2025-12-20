@@ -38,7 +38,7 @@ interface Profile {
   sessionToken: string
 }
 const ProfileForm: React.FC<Profile> = ({ profile, sessionToken }) => {
-  console.log('profile', profile)
+  // console.log('profile', profile)
   const router = useRouter()
   const form = useForm<UpdateMeBodyType>({
     resolver: zodResolver(UpdateMeBody),
@@ -62,7 +62,7 @@ const ProfileForm: React.FC<Profile> = ({ profile, sessionToken }) => {
       toast.success('Lưu thành công', {
         description: 'Chúng tôi đã cập nhật địa chỉ giao hàng của bạn'
       })
-      console.log('result form update', result)
+      // console.log('result form update', result)
       // router.prefetch('/account')
       router.push('/account') // Instead of prefetching, we push to refresh the profile page
     } catch (error: any) {

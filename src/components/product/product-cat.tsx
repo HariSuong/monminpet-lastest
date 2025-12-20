@@ -8,7 +8,7 @@ import { Category } from '@/types/cats'
 import slugify from 'slugify'
 
 const ProductCat: React.FC<{ productsCat: Category[] }> = ({ productsCat }) => {
-  console.log('productsCat', productsCat)
+  // console.log('productsCat', productsCat)
 
   const products = productsCat?.map(cat => {
     if (cat.products.length === 0) return null

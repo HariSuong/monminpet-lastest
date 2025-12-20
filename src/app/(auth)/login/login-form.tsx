@@ -27,7 +27,7 @@ const LoginForm = () => {
 
   const redirectPath = searchParams.get('redirect') || '/'
 
-  console.log('redirectPath', redirectPath)
+  // console.log('redirectPath', redirectPath)
 
   const router = useRouter()
   const form = useForm<LoginBodyType>({

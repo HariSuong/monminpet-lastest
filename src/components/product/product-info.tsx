@@ -79,12 +79,12 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
 
   // Hàm xử lý khi người dùng chọn thuộc tính
   const handleSelectAttribute = (value: CartAttributeOption) => {
-    console.log('attr', value)
+    // console.log('attr', value)
     setSelectedAttributes(prevAttributes => {
       const updatedAttributes = prevAttributes.filter(
         attr => attr.attribute_id !== value.attribute_id
       )
-      console.log('updatedAttributes', updatedAttributes)
+      // console.log('updatedAttributes', updatedAttributes)
       return [...updatedAttributes, value]
     })
   }
@@ -118,14 +118,14 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
 
   // Hàm xử lý thêm sản phẩm vào giỏ hàng
   const handleAddToCart = () => {
-    console.log('selectedAttributes', selectedAttributes)
+    // console.log('selectedAttributes', selectedAttributes)
     // Kiểm tra nếu có thuộc tính và product_id đã được lấy đúng
     if (!selectedAttributes || selectedAttributes.length === 0) {
       // Chỉ tính ID một lần và lưu vào useRef
       // if (!generatedIdRef.current) {
       //   generatedIdRef.current = generateCartItemId([], id)
       // }
-      console.log('selectedAttributes', selectedAttributes)
+      // console.log('selectedAttributes', selectedAttributes)
       const itemToAdd = {
         id: generateCartItemId([], id),
         name,

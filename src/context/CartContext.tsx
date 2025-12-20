@@ -41,7 +41,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!isCartLoaded) return // 👈 chặn lần đầu tiên
 
-    console.log('carrt ussecontext', cart)
+    // console.log('carrt ussecontext', cart)
     if (cart.length > 0) {
       localStorage.setItem('cart', JSON.stringify(cart))
     }
@@ -53,7 +53,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     defaultImage: string,
     productAttributes: Attribute[]
   ) => {
-    console.log('item', item)
+    // console.log('item', item)
 
     setCart(prev => {
       const formattedAttributes: CartAttributeOption[] = Array.isArray(
@@ -67,7 +67,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       // // Giữ lại ID hiện tại của sản phẩm thay vì tạo ID mới
       // const cartItemId = item.id // Sử dụng ID hiện tại
 
-      console.log('prev', prev)
+      // console.log('prev', prev)
       // console.log('cartItemId user Cart', cartItemId)
 
       // Kiểm tra nếu sản phẩm đã có trong giỏ hàng với thuộc tính giống nhau
@@ -144,8 +144,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const updatedAttributes = item.attributes.map(attr =>
       attr.attribute_id === newSize.attribute_id ? newSize : attr
     )
-    console.log('item', item)
-    console.log('newSize', newSize)
+    // console.log('item', item)
+    // console.log('newSize', newSize)
     // Tạo ID mới cho sản phẩm dựa trên thuộc tính size mới
     const updatedItemId = generateCartItemId(
       updatedAttributes,
@@ -230,7 +230,7 @@ Và giỏ hàng đã được xóa khi thêm thành công. Tôi cần tạo ra m
     attributeParentId: number,
     attributeId: number
   ) => {
-    console.log('attributeId', attributeId)
+    // console.log('attributeId', attributeId)
     return cart.some(item =>
       item.attributes.some(
         attr =>

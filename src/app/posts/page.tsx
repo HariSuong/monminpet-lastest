@@ -7,14 +7,13 @@ import { Suspense } from 'react'
 // App router: force dynamic để mỗi lần request đều fresh
 export const dynamic = 'force-dynamic'
 
-
 export const metadata: Metadata = {
   title: 'Bài Viết',
   description:
     'Cập nhật các bài viết mới nhất về chăm sóc thú cưng, mẹo nuôi thú, dinh dưỡng và kiến thức thú y tại Monminpet.',
-    // 👇 THÊM PHẦN NÀY VÀO 👇
+  // 👇 THÊM PHẦN NÀY VÀO 👇
   alternates: {
-    canonical: 'https://monminpet.com/posts',
+    canonical: 'https://monminpet.com/posts'
   },
   openGraph: {
     title: 'Bài Viết | Monminpet',
@@ -62,7 +61,7 @@ const breadcrumbSchema = {
 
 const PostsHome = async () => {
   const { payload: postsCat } = await postApiRequest.getPostsCat()
-  console.log('postsCat', postsCat)
+  // console.log('postsCat', postsCat)
   return (
     <Suspense fallback={<Loading />}>
       {/* 👇 THÊM SCRIPT SCHEMA VÀO ĐÂY 👇 */}

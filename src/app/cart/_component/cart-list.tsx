@@ -50,7 +50,7 @@ const CartList: React.FC = () => {
     )
 
   const removeItem = (id: string) => {
-    console.log('id', id)
+    // console.log('id', id)
     if (id && itemToDelete === id) {
       removeFromCart(id)
       setOpenDialog(false)
@@ -62,7 +62,7 @@ const CartList: React.FC = () => {
     attributeParentId: number,
     attributeId: number
   ) => {
-    console.log('attributeId', attributeId)
+    // console.log('attributeId', attributeId)
     return cart.some(item =>
       item.attributes.some(
         attr =>

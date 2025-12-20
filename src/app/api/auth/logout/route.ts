@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    console.log('sessionToken.value', sessionToken.value)
+    // console.log('sessionToken.value', sessionToken.value)
     const result = await authApiRequest.logoutFrNextServerToServer(
       sessionToken.value
     )

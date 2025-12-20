@@ -18,7 +18,7 @@ const PostDetail = ({ payload }: { payload: PostDetailRes }) => {
 
   // // Hiển thị theo format dd/mm/yyyy
   // const formattedDate = `Ngày đăng: ${day}/${month}/${year}`
-  console.log('payload', payload)
+  // console.log('payload', payload)
 
   return (
     <div className='container mx-auto py-24 md:pt-32 md:pb-16 lg:py-40'>

@@ -33,16 +33,14 @@ const PaymentInfo = ({
     setTimeout(() => setCopied(false), 2000) // Reset sao chép sau 2 giây
   }
 
-  
-
-  console.log('orderId', orderId)
+  // console.log('orderId', orderId)
 
   // Hàm kiểm tra trạng thái thanh toán
   const checkPaymentStatus = React.useCallback(async () => {
     if (!orderId) return false
     try {
       const result = await accountApiRequest.invoice(orderId)
-      console.log('result.payload.data.paid', result.payload.data.paid)
+      // console.log('result.payload.data.paid', result.payload.data.paid)
       return result.payload.data.paid === 1
     } catch (error) {
       return false
@@ -54,7 +52,7 @@ const PaymentInfo = ({
 
     const paymentPolling = setInterval(async () => {
       const isPaid = await checkPaymentStatus()
-      console.log('isPaid', isPaid)
+      // console.log('isPaid', isPaid)
       if (isPaid) {
         clearInterval(paymentPolling)
         toast.success('Thanh toán thành công', {

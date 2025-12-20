@@ -23,13 +23,13 @@ export async function middleware(request: NextRequest) {
   const isAuth = authPaths.some(
     path => pathname === path || pathname.startsWith(`${path}/`)
   )
-  console.log('sessionToken', sessionToken)
+  // console.log('sessionToken', sessionToken)
   // Thêm logic validate token với backend
   if (isPrivate && sessionToken) {
     try {
       // Gọi API backend validate token đúng url từ biến môi trường
       const validateUrl = `${envConfig.NEXT_PUBLIC_API_URL}/auth/validate`
-      console.log('validateUrl', validateUrl)
+      // console.log('validateUrl', validateUrl)
       const validateResponse = await fetch(validateUrl, {
         headers: {
           Authorization: `Bearer ${sessionToken.value}`,

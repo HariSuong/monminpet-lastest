@@ -51,7 +51,7 @@ const settings = {
 const ProductSliderHome: React.FC<{ products: ProductHome[] }> = ({
   products
 }) => {
-  console.log('products', products)
+  // console.log('products', products)
 
   return (
     <Slider {...settings}>

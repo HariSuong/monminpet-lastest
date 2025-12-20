@@ -10,7 +10,7 @@ const BuyAgain = (
   const { clearCart, setCart } = useCart() // Chỉ cần clearCart
   const router = useRouter()
   const handleBuyAgain = (jsonInvoices: string) => {
-    console.log('jsonInvoices', jsonInvoices)
+    // console.log('jsonInvoices', jsonInvoices)
     clearCart() // Xóa giỏ hàng hiện tại
 
     const newCart = JSON.parse(jsonInvoices) // Chuyển JSON thành object

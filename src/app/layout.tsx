@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   // Thêm các link và icon vào đây
   icons: {
     icon: '/logo/fav-monminpet.png',
-    apple: '/logo/fav-monminpet.png', // Cho apple-touch-icon
+    apple: '/logo/fav-monminpet.png' // Cho apple-touch-icon
   },
 
   // 👇 BẠN THÊM VÀO ĐÂY NÈ 👇
@@ -37,7 +37,6 @@ export const metadata: Metadata = {
     }
   }
   // 👆 THÊM VÀO ĐÂY NÈ 👆
-  
 }
 
 export default function RootLayout({
@@ -47,9 +46,9 @@ export default function RootLayout({
 }>) {
   const cookie = cookies()
   const sessionToken = cookie.get('sessionToken')?.value
-  console.log('sessionToken', sessionToken)
+  // console.log('sessionToken', sessionToken)
   const isLoggedIn = sessionToken !== undefined ? true : false
-  const GA_TRACKING_ID = "G-Y2VXBYW38T"; // Mã Google Analytics của bạn
+  const GA_TRACKING_ID = 'G-Y2VXBYW38T' // Mã Google Analytics của bạn
 
   return (
     <html lang='vi'>
@@ -82,16 +81,12 @@ export default function RootLayout({
           </CouponProvider>
         </Providers>
 
-
-       {/* --- BẮT ĐẦU PHẦN GOOGLE ANALYTICS --- */}
-        <Script 
-          strategy="afterInteractive" 
+        {/* --- BẮT ĐẦU PHẦN GOOGLE ANALYTICS --- */}
+        <Script
+          strategy='afterInteractive'
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
         />
-        <Script 
-          id="google-analytics-config" 
-          strategy="afterInteractive"
-        >
+        <Script id='google-analytics-config' strategy='afterInteractive'>
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

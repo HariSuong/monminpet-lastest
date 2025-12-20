@@ -36,7 +36,7 @@ const MobileCartItems = () => {
           attr => attr.attribute_id === 7
         )
 
-        console.log('tasteAttribute', tasteAttribute)
+        // console.log('tasteAttribute', tasteAttribute)
 
         return (
           <div key={item.id} className='w-full pb-4 mb-4'>

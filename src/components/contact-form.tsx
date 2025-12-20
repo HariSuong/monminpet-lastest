@@ -60,7 +60,7 @@ const ContactForm: React.FC<{ services: ServicesCat[] }> = ({ services }) => {
   const onSubmit = async (data: z.infer<typeof contactSchema>) => {
     setLoading(true)
 
-    console.log('data', data)
+    // console.log('data', data)
     const contactBody = {
       service: data.service || '',
       pet: data.pet || '',
@@ -71,12 +71,12 @@ const ContactForm: React.FC<{ services: ServicesCat[] }> = ({ services }) => {
       message: data.message || ''
     }
 
-    console.log('contactBody', contactBody)
+    // console.log('contactBody', contactBody)
 
     try {
       const response = await serviceApiRequest.submitMessage(contactBody)
 
-      console.log('response', response)
+      // console.log('response', response)
       // Xử lý kết quả trả về
       if (response.payload?.success) {
         toast.success(response.payload?.success)

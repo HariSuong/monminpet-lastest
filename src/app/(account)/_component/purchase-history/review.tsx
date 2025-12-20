@@ -95,7 +95,7 @@ const Review = ({
       router.push(`/account/purchase-history/${orderId}?tab=purchase-history`)
       router.refresh()
 
-      console.log('result form update', result)
+      // console.log('result form update', result)
     } catch (error: any) {
       console.error('Error submitting review:', error)
       const status = error.status as number

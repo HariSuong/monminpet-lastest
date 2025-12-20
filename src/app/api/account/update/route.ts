@@ -10,7 +10,7 @@ export async function PUT(request: NextRequest) {
     const sessionToken = cookies().get('sessionToken')?.value
 
     // const sessionToken = body.sessionToken as string
-    console.log('sessionToken route', sessionToken, 'body', body)
+    // console.log('sessionToken route', sessionToken, 'body', body)
     if (!sessionToken) {
       return Response.json(
         { message: 'Không nhận được session token' },

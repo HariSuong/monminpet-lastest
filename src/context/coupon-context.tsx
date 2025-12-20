@@ -157,7 +157,7 @@ export const CouponProvider: React.FC<{ children: React.ReactNode }> = ({
           response.payload.data?.discount_amount || 0
         )
 
-        console.log('response.payload', response.payload)
+        // console.log('response.payload', response.payload)
         setCodeCoupon(response.payload.data.code)
 
         setDiscount(discountAmount)

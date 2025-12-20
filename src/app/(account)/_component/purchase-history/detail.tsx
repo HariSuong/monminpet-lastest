@@ -28,7 +28,7 @@ interface Product {
 }
 
 const PurchaseDetail = ({ invoiceDetail }: { invoiceDetail: InvoiceType }) => {
-  console.log('invoiceDetail', invoiceDetail)
+  // console.log('invoiceDetail', invoiceDetail)
   const averageStar =
     invoiceDetail.products.reduce((acc, product) => acc + product.rating, 0) /
     invoiceDetail.products.length

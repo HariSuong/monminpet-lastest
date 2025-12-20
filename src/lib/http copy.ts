@@ -13,7 +13,7 @@ export class HttpError extends Error {
     [key: string]: any
   }
   constructor({ status, payload }: { status: number; payload: any }) {
-    super(payload?.message || `HTTP Error: ${status}`)
+    super(payload.message || `HTTP Error: ${status}`)
     this.status = status
     this.payload = payload
   }
@@ -27,6 +27,7 @@ class SessionTokenClient {
   }
 
   set value(token: string) {
+    // Nếu gọi method này ở server thì sẽ bị lỗi
     if (typeof window === 'undefined') {
       throw new Error('Không thể thiết lập token trên server side')
     }
@@ -40,21 +41,24 @@ const request = async <Response>(
   url: string,
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
   options?: CustomOptions | undefined,
-  timeout = 10000
+  //xử lý timeout cho request
+  timeout = 10000 // 10s
 ) => {
+  //Dùng AbortController để hủy request sau một khoảng thời gian nhất định
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), timeout)
 
   const body = options?.body ? JSON.stringify(options.body) : undefined
 
-  const baseHeaders: Record<string, string> = {
+  const baseHeaders = {
     'Content-Type': 'application/json',
-    // 👇 quan trọng: yêu cầu backend trả JSON (nếu backend tôn trọng Accept)
-    Accept: 'application/json',
     Authorization: sessionTokenClient.value
       ? `Bearer ${sessionTokenClient.value}`
       : ''
   }
+
+  // Nếu không truyền baseUrl, tức baseUrl = undefined thì lấy từ envConfig.NEXT_PUBLIC_API_URL
+  // Nếu truyền baseUrl thì lấy giá trị truyền vào, truyền '' đồng nghĩa với việc chúng ta gọi API tới Nextjs server
 
   const baseUrl =
     options?.baseUrl === undefined
@@ -63,92 +67,58 @@ const request = async <Response>(
 
   const fullUrl = url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`
 
+  // console.log('Request Option:', options)
+  // console.log('Request URL:', fullUrl)
+  // console.log('Request Body:', body)
+
   try {
     const response = await fetch(fullUrl, {
       ...options,
       method,
       headers: {
         ...baseHeaders,
-        ...(options?.headers as Record<string, string> | undefined)
+        ...options?.headers
       },
       body,
-      signal: controller.signal
+      signal: controller.signal // Gán signal cho fetch
     })
+    clearTimeout(timeoutId) // Xóa timeout nếu request thành công
 
-    clearTimeout(timeoutId)
-
-    // ✅ Đọc rawText trước để tránh crash khi response là HTML
-    const contentType = response.headers.get('content-type') || ''
-    const rawText = await response.text()
-
-    // Thêm phần kiểm tra lỗi 401 (giữ logic cũ)
+    // Thêm phần kiểm tra lỗi 401
     if (response.status === 401) {
       const redirectUrl = `/login?redirect=${encodeURIComponent(
-        typeof window !== 'undefined' ? window.location.pathname : '/'
+        window.location.pathname
       )}`
 
+      // Chỉ xử lý trên client
       if (typeof window !== 'undefined') {
         await authApiRequest.logoutFrClientToNextServer()
         window.location.href = redirectUrl
-        return {} as any
+        return {} as any // Dừng xử lý tiếp
       }
 
+      // Nếu ở server-side (SSR)
       throw new HttpError({
         status: 401,
         payload: { message: 'Phiên đăng nhập đã hết hạn', redirectUrl }
       })
     }
 
-    // ✅ Nếu server trả về HTML / text (thường là 502/504/403/Cloudflare/Nginx/Laravel error page...)
-    // thì log preview để bắt bệnh + quăng lỗi rõ ràng
-    if (!contentType.includes('application/json')) {
-      console.error('[API NON-JSON RESPONSE]', {
-        url: fullUrl,
-        status: response.status,
-        contentType,
-        preview: rawText.slice(0, 400) // đủ để thấy <title> / thông báo lỗi
-      })
-
-      throw new HttpError({
-        status: response.status,
-        payload: {
-          message: `API returned non-JSON response (status ${response.status})`,
-          url: fullUrl,
-          contentType
-        }
-      })
+    const payload: Response = await response.json()
+    const data = {
+      status: response.status,
+      payload
     }
-
-    // ✅ Parse JSON an toàn
-    let payload: Response
-    try {
-      payload = JSON.parse(rawText) as Response
-    } catch (e) {
-      console.error('[API INVALID JSON]', {
-        url: fullUrl,
-        status: response.status,
-        preview: rawText.slice(0, 400)
-      })
-      throw new HttpError({
-        status: response.status,
-        payload: {
-          message: 'Invalid JSON returned from API',
-          url: fullUrl
-        }
-      })
-    }
-
-    const data = { status: response.status, payload }
+    // console.log('Dữ liệu ', data)
 
     if (!response.ok) {
-      // backend có trả JSON nhưng là error => giữ nguyên HttpError
       throw new HttpError(data)
     }
 
-    // Set sessionToken cho login/register/logout (giữ logic cũ)
+    // Set sessionToken cho login và register và đảm bảo logic dưới đây chỉ chạy phía client (browser)
     if (typeof window !== 'undefined') {
       if (['/login', '/register'].includes(url)) {
-        sessionTokenClient.value = (payload as any as LoginResType).token
+        sessionTokenClient.value = (payload as LoginResType).token
       } else if (['/logout'].includes(url)) {
         sessionTokenClient.value = ''
       }
@@ -157,7 +127,7 @@ const request = async <Response>(
     return data
   } catch (error: any) {
     clearTimeout(timeoutId)
-    if (error?.name === 'AbortError') {
+    if (error.name === 'AbortError') {
       throw new Error('Request timeout')
     }
     throw error
@@ -169,7 +139,6 @@ const http = {
     url: string,
     options?: Omit<CustomOptions, 'body'> | undefined
   ) => request<Response>(url, 'GET', options),
-
   post: <Response>(
     url: string,
     body: any,
