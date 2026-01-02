@@ -12,7 +12,7 @@ const ButtonLogout = () => {
   const router = useRouter()
   const handleLogout = async () => {
     try {
-      const resultClient = await authApiRequest.logoutFrClientToNextServer()
+      await authApiRequest.logoutFrClientToNextServer()
       // console.log('resultClient', resultClient)
       router.push('/login')
       router.refresh()
