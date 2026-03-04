@@ -1,4 +1,6 @@
 import Banner from '@/components/banner'
+import HeroSlider from '@/components/hero-slider'
+
 import PetCats from '@/components/home/cats'
 import FeedBack from '@/components/home/feedback'
 import PetCommit from '@/components/home/pet-commit'
@@ -31,14 +33,30 @@ const organizationSchema = {
 export default async function Home() {
   const home = await homeApiRequest.getHome
   // console.log('menu_parents', home.payload.data.menu_parents)
+  const homeBanners = [
+    '/hero/home/ba4.png', // Thay bằng path ảnh thật của bạn
+    '/hero/home/ba5.png',
+    '/hero/home/ba6.png'
+  ]
   return (
     <>
-
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <Banner type='video' url='/home/banner.mp4?t=1' />
+      {/* <Banner type='video' url='/home/banner.mp4?t=1' /> */}
+      {/* const images =  */}
+
+      <HeroSlider
+        images={homeBanners}
+        customSettings={{
+          autoplaySpeed: 3000,
+          swipe: true, // Cho phép vuốt trên mobile
+          draggable: true, // Cho phép dùng chuột kéo trên desktop
+          swipeToSlide: true, // Giúp việc kéo thả cảm giác "dính" tay và tự nhiên hơn
+          touchThreshold: 10 // Độ nhạy khi vuốt (số càng lớn càng dễ vuốt)
+        }}
+      />
 
       <div id='observer-target'>
         <ProductHot products={home.payload.data.products} />
